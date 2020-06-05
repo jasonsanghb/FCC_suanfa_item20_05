@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--如果传入的字符串是一个有效的美国电话号码格式，则返回true。-->
+
+<!--只要是有效的美国电话号码的格式，用户可以按照他们的方式填写表单中的电话号码。以下是一些正确的例子（其他格式变形请参考以下例子）：-->
+
+<!--555-555-5555-->
+<!--(555)555-5555-->
+<!--(555) 555-5555-->
+<!--555 555 5555-->
+<!--5555555555-->
+<!--1 555 555 5555-->
+<!--在这个挑战中，你将会看到例如800-692-7753或者8oo-six427676;laskdjf的号码。你的任务是根据上面不同的格式组合，判断它是否美国号码。区号是必须的。如果提供国家代码，则必须确认国家代码为1。如果这是有效的美国电话就返回true，否则返回false。-->
+
+<!--telephoneCheck("555-555-5555")应该返回布尔值。-->
+<!--telephoneCheck("1 555-555-5555")应该返回 true。-->
+<!--telephoneCheck("1 (555) 555-5555")应该返回 true。-->
+<!--telephoneCheck("5555555555")应该返回 true。-->
+<!--telephoneCheck("555-555-5555")应该返回 true。-->
+<!--telephoneCheck("(555)555-5555")应该返回 true。-->
+<!--telephoneCheck("1(555)555-5555")应该返回 true。-->
+<!--telephoneCheck("555-5555")应该返回 false。-->
+<!--telephoneCheck("5555555")应该返回 false。-->
+<!--telephoneCheck("1 555)555-5555")应该返回 false。-->
+<!--telephoneCheck("1 555 555 5555")应该返回 true。-->
+<!--telephoneCheck("1 456 789 4444")应该返回 true。-->
+<!--telephoneCheck("123**&!!asdf#")应该返回 false。-->
+<!--telephoneCheck("55555555")应该返回 false。-->
+<!--telephoneCheck("(6054756961)")应该返回 false。-->
+<!--telephoneCheck("2 (757) 622-7382")应该返回 false。-->
+<!--telephoneCheck("0 (757) 622-7382")应该返回 false。-->
+<!--telephoneCheck("-1 (757) 622-7382")应该返回 false。-->
+<!--telephoneCheck("2 757 622-7382")应该返回 false。-->
+<!--telephoneCheck("10 (757) 622-7382")应该返回 false。-->
+<!--telephoneCheck("27576227382")应该返回 false。-->
+<!--telephoneCheck("(275)76227382")应该返回 false。-->
+<!--telephoneCheck("2(757)6227382")应该返回 false。-->
+<!--telephoneCheck("2(757)622-7382")应该返回 false。-->
+<!--telephoneCheck("555)-555-5555")应该返回 false。-->
+<!--telephoneCheck("(555-555-5555")应该返回 false。-->
+<!--telephoneCheck("(555)5(55?)-5555")应该返回 false。-->
+
+<!--经验：判断字符串中是否含有(),()需要加上\,相当于/[\(\)]/g.test-->
+<!--判断字符串里是否含有-，需要加上\，相当于\- -->
+<!--字符串里面使用正则表达式的|，要在两个表达式外面+（）-->
+<script>
+    function telephoneCheck(str) {
+        return /^(1\s?)?(\(\d{3}\)|\d{3})[\s\-]?\d{3}[\s\-]?\d{4}$/.test(str)
+    }
+
+    console.log(telephoneCheck('27576227382'));
+</script>
+</body>
+</html>

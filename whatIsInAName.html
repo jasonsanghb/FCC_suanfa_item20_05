@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+//     在这道题目中，我们要写一个函数，它接收两个参数：第一个参数是对象数组，第二个参数是一个对象。我们需要从对象数组中找出与第二个参数相等或包含第二个参数的所有对象，并以对象数组的形式返回。其中，相等的意思是原数组中的对象与第二个参数中对象的所有键值对完全相等；包含的意思是只要第二个参数中对象的所有键存在于原数组对象中，且它们对应的值相同即可。
+//
+// 比如，如果第一个参数是[{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }]，第二个参数是{ last: "Capulet" }。那么你需要以对象数组的形式返回第一个参数中的第三个元素，因为它包含第二个参数中定义的键last，且对应的值"Capulet"相同
+function whatIsInAName(collection, source) {
+    // What's in a name?
+    var arr = [];
+    // 请把你的代码写在这条注释以下
+    // for(let prop1 in source){
+    //     collection.forEach(item=>{
+    //         for(let prop2 in item){
+    //             if(prop1 ===prop2 && source[prop1] ===item[prop2]){
+    //                 arr.push(item)
+    //             }
+    //
+    //         }
+    //     })
+    // }
+    // 首先遍历source数组，知道该数组中有几个键值对
+    let num = 0
+    for(let prop in source){
+        num++
+    }
+    for (let i = 0; i < collection.length; i++) {
+
+        // 设置一个计数器，记录prop1 ===prop2 && collection[i][prop1] === source[prop2]这个条件成立的次数
+        let count = 0
+        for(let prop1 in collection[i]){
+            for(let prop2 in source){
+                if(prop1 ===prop2 && collection[i][prop1] === source[prop2] ){
+                    count++
+                }
+            }
+
+        }
+        // 如果num和count相等，说明达到目标
+        if(num === count){
+            arr.push(collection[i])
+        }
+
+    }
+
+
+
+
+
+
+
+
+    // 请把你的代码写在这条注释以上
+    return arr;
+}
+
+console.log(whatIsInAName([{ "apple": 1, "bat": 2 }, { "bat": 2 }, { "apple": 1, "bat": 2, "cookie": 2 }], { "apple": 1, "bat": 2 }));
+</script>
+</body>
+</html>

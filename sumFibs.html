@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //     在这道题目中，我们需要写一个函数，参数为一个正整数num。它的作用是计算斐波那契数列中，小于或等于num的奇数之和。
+    //
+    // 斐波那契数列中，第一和第二个数字都是 1，后面的每个数字由之前两数相加得出。斐波那契数列的前六个数字分别为：1、1、2、3、5、8。
+    //
+    // 比如，sumFibs(10)应该返回10。因为斐波那契数列中，比10小的数字只有 1、1、3、5。
+    function sumFibs(num) {
+
+        const newArr = (function() {
+            let sum = 0;
+            let x = 1;
+            let y = 1;
+            const arr = [];
+            arr.push(x);
+            arr.push(y);
+            while (true) {
+                sum = x + y;
+                if (sum > num) {
+                    return arr;
+                }
+                arr.push(sum);
+                x = y;
+                y = sum;
+
+            }
+
+        })();
+        const finalArr = newArr.filter(item=>{
+            return item%2===1
+        })
+        return finalArr.reduce((sum,item)=>{
+            return sum + item
+        },0)
+
+    }
+
+    console.log(sumFibs(4));
+</script>
+</body>
+</html>

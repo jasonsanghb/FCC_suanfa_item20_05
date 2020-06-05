@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+//     在这道题目中，我们需要写一个字符串的搜索与替换函数，它的返回值为完成替换后的新字符串。
+//
+// 这个函数接收的第一个参数为待替换的句子。
+//
+// 第二个参数为句中需要被替换的单词。
+//
+// 第三个参数为替换后的单词。
+//
+// 注意：
+// 你需要保留被替换单词首字母的大小写格式。即如果传入的第二个参数为 "Book"，第三个参数为 "dog"，那么替换后的结果应为 "Dog"
+function myReplace(str, before, after) {
+    const reg = new RegExp('\\b'+before+'\\b','g')
+    if(before.slice(0,1)<'a'){
+        const afterFir = after.slice(0,1)
+        const afterEnd = after.slice(1)
+        const newAfterFir = afterFir.toUpperCase()
+        after = newAfterFir+afterEnd
+    }
+    return str.replace(reg,after);
+
+}
+
+console.log(myReplace('A quick brown fox jumped over the lazy dog', 'jumped', 'leaped'));
+</script>
+</body>
+</html>

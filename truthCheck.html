@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+//     在这道题目中，我们需要写一个函数，它接收两个参数。第一个参数为对象数组collection，第二个参数为一个字符串pre，代表对象的一个键（key）。我们需要检查对象数组中每个对象的pre属性对应的值是否都为 “真”（truthy）。如果是，则返回true，否则返回false。
+//
+// JavaScript 中，如果一个值在 Boolean 的上下文中（比如if语句）可以被执行为true，那么这个值就被认为是truthy的。
+//
+// 注意，你可以选择使用.或[]来访问对象属性对应的值。
+function truthCheck(collection, pre) {
+
+    // 设置一个数组，用来存储参数属性对应的在每一个对象中的属性值
+    const newArr = []
+    for (let i = 0; i < collection.length; i++) {
+        // 设置一个标识符，用来判断每一个对象中是否没有有这个属性
+        let flag = false
+        for(let prop in collection[i]){
+            if(prop === pre){
+                flag=true
+                newArr.push(collection[i][prop])
+            }
+        }
+        if(!flag){
+            newArr.push(undefined)
+        }
+    }
+    //设置一个标识符，默认为true，判断每个对象的pre属性对应的值是否都为 “真”
+    let flag = true
+    for (let i = 0; i < newArr.length; i++) {
+
+        if(!newArr[i]){
+            flag = false
+        }
+    }
+    return flag;
+}
+
+console.log(truthCheck([{"user": "Tinky-Winky", "sex": "male"}, {"user": "Dipsy"}, {"user": "Laa-Laa", "sex": "female"}, {"user": "Po", "sex": "female"}], "sex"));
+</script>
+</body>
+</html>

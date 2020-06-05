@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--在这道题目中，我们需要写一个函数，它接收一个数字参数num，返回值为不大于这个数字的所有质数之和。-->
+
+<!--质数是大于 1 且仅可以被 1 和自己整除的数。比如，2 就是一个质数，因为它只可以被 1 和 2（它本身）整除。-->
+
+<!--注意，传入函数的num不一定是质数。-->
+<script>
+    function sumPrimes(num) {
+
+        const newArr = (function() {
+            const arr = []
+            for (let i = 2; i <= num; i++) {
+                // 设置一个标识符 默认为true 代表是质数
+                let flag = true
+                for (let j = 2; j <= Math.sqrt(i); j++) {
+
+                    if(i%j===0){
+                        flag = false
+                        break;
+                    }
+                }
+                if(flag){
+                    arr.push(i)
+                }
+
+            }
+            return arr
+
+        })();
+        return newArr.reduce((sum,item)=>{
+            return sum+item
+        })
+    }
+
+    console.log(sumPrimes(10));
+</script>
+</body>
+</html>

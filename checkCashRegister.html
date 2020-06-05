@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--编写一个用于收银机的函数checkCashRegister()，传入售价为第一个参数（price）、支付金额为第二个参数（cash）、收银机內的金额为第三个参数（cid）。-->
+
+<!--cid是包含货币面值的二维数组。-->
+
+<!--函数checkCashRegister()必须返回含有status键值和change键值的对象。-->
+
+<!--如果收银机內的金额少于应找回的零钱数，或者你无法返回确切的数目时，返回{status: "INSUFFICIENT_FUNDS", change: []}。-->
+
+<!--如果收银机內的金额等于应找回的零钱数，返回{status: "CLOSED", change: [...]}，其中change键值是收银机內的金额。-->
+
+<!--否则，返回{status: "OPEN", change: [...]}，其中change键值是应找回的零钱数，并且它的面值由高到低排序。-->
+<script>
+    const refList =[
+        {name:'ONE HUNDRED',val:100},
+        {name:'TWENTY',val:20},
+        {name:'TEN',val:10},
+        {name:'FIVE',val:5},
+        {name: 'ONE',val:1 },
+        { name:'QUARTER',val:0.25 },
+        {name: 'DIME',val:0.1 },
+        { name:'NICKEL',val:0.05 },
+        { name:'PENNY',val:0.01 }
+    ]
+    function checkCashRegister(price, cash, cid) {
+        const result = {status: null, change: []}
+        // 要找的零钱数
+        let change = cash - price
+        // newCid对象：total属性是收银机里面全部的钱数，其他是cid的简化形式
+        const newCid = cid.reduce((arr,item)=>{
+            arr.total += item[1]
+            arr.total = Math.round(arr.total*100)/100
+            arr[item[0]] = item[1]
+            return arr
+        },{total:0})
+        // 如果收银机里面全部的钱数小于要找的零钱数，肯定找不起
+        if(newCid.total<change){
+            result.status = "INSUFFICIENT_FUNDS"
+            return result
+        }
+        // 如果收银机里面全部的钱数等于要找的零钱数，正好
+        if(newCid.total === change){
+            result.status = "CLOSED"
+            result.change = cid
+            return result
+        }
+        // 如果收银机里面全部的钱数大于要找的零钱数
+        for (let i = 0; i < refList.length; i++) {
+            // 当前索引为i的refList对象中val属性的值
+            const value = refList[i].val
+            // 当前索引为i的refList对象name的值对应的newCid的数目
+            let moneyNum = -1
+            for(let prop in newCid){
+                if(refList[i].name === prop){
+                    moneyNum = newCid[prop]
+                }
+            }
+            // 记录下面while循环进行几次
+            let count = 0
+            while( moneyNum>0 && change >= value ){
+                change = change - value
+                change = Math.round(change*100)/100
+                moneyNum = moneyNum - value
+                moneyNum = Math.round(moneyNum*100)/100
+                count++
+            }
+
+            if(count){
+                result.change.push([ refList[i].name,count*value ])
+            }
+
+        }
+        if(change>0||result.change.length<1){
+            result.status = "INSUFFICIENT_FUNDS"
+            result.change = []
+            return result
+        }
+        result.status = "OPEN";
+        return result
+    }
+
+    console.log(checkCashRegister(19.5, 20, [['PENNY', 0.01], ['NICKEL', 0], ['DIME', 0], ['QUARTER', 0], ['ONE', 1], ['FIVE', 0], ['TEN', 0], ['TWENTY', 0], ['ONE HUNDRED', 0]]));
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //     在这道题目中，我们需要写一个函数，比较两个数组，返回一个新的数组。这个新数组需要包含传入的两个数组所有元素中，仅在其中一个数组里出现的元素。如果某个元素同时出现在两个数组中，则不应包含在返回的数组里。换言之，我们需要返回这两个数组的对称差。
+    //
+    // 如果你遇到了问题，请点击帮助。
+    //
+    // 注意：
+    // 返回数组中的元素顺序不会影响测试结果。
+    function diffArray(arr1, arr2) {
+        const newArr = [];
+
+        for (let i = 0; i < arr1.length; i++) {
+            // 默认两个数比较不同
+            let flag = false;
+            for (let j = 0; j < arr2.length; j++) {
+                if (arr1[i] === arr2[j]) {
+                    flag = true;
+                    break;
+                }
+            }
+
+            if (!flag) {
+                newArr.push(arr1[i]);
+            }
+        }
+
+
+        for (let i = 0; i < arr2.length; i++) {
+            // 默认两个数比较不同
+            let flag = false;
+            for (let j = 0; j < arr1.length; j++) {
+                if (arr2[i] === arr1[j]) {
+                    flag = true;
+                    break;
+                }
+            }
+
+            if (!flag) {
+                newArr.push(arr2[i]);
+            }
+        }
+
+
+        return newArr;
+    }
+
+    console.log(diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]));
+</script>
+</body>
+</html>

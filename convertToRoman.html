@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //     把传入的数字转变为罗马数字。
+    //
+    // 转换后的罗马数字字母必须都是大写。
+    function convertToRoman(num) {
+        const floorArr = [1000,900,500,400,100,90,50,40,10,9,5,4,1]
+        const romanArr = [ 'M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I' ]
+        const arr = floorArr.reduce((res,item,i)=>{
+            // let cishu = 0
+            while(num-item>=0){
+                num = num - item
+                // cishu++
+                res.push(romanArr[i])
+
+            }
+            return res
+        },[])
+        return arr.join('')
+    }
+
+    convertToRoman(36);
+</script>
+</body>
+</html>

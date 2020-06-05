@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 在这道题目中，我们需要写一个函数，把一个字符串转换为“短线连接格式”。短线连接格式的意思是，所有字母都是小写，且用-连接。比如，对于Hello World，应该转换为hello-world；对于I love_Javascript-VeryMuch，应该转换为i-love-javascript-very-much。
+//     spinalCase("This Is Spinal Tap")应该返回"this-is-spinal-tap"。
+// spinalCase("thisIsSpinalTap")应该返回"this-is-spinal-tap"。
+// spinalCase("The_Andy_Griffith_Show")应该返回"the-andy-griffith-show"。
+// spinalCase("Teletubbies say Eh-oh")应该返回"teletubbies-say-eh-oh"。
+// spinalCase("AllThe-small Things")应该返回"all-the-small-things"。
+
+    function spinalCase(str) {
+
+        const reg = /\s+|_+/g
+        str = str.replace(/([a-z])([A-Z])/g,'$1 $2')
+        return str.replace(reg,'-').toLowerCase();
+    }
+
+    console.log(spinalCase('AllThe-small Things'));
+</script>
+</body>
+</html>
